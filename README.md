@@ -43,3 +43,71 @@ Required folder structure:
 **Step 4 (metrics_calc_test.py):** Calculating Metrics
 
 Calculates metrics for UNet classified images and reference images (masks).
+
+### Using the Mapping Deforestation Script
+The scripts for this functionality are in the **deforestation-mapping** folder. To execute the algorithm, use the file **deforestation_main.py**, where some information must be added:
+
+```ruby
+# scripts that must be in the same path that this one
+from deforestation_mapping import *
+
+# .GEOjson file of the area to be monitored
+geojson_file = '/rondonia_square3.geojson'
+
+# path to save the downloaded images
+save_imgs = '/Downloaded'
+
+# save RGB files
+save_rgb = '/rgb_files'
+
+# save tiles
+save_tiles = '/tiles_imgs"
+
+# Unet weights file
+unet_weights = "/weights_file_of_trained_UNet.hdf5"
+
+# Unet weights clouds file
+unet_clouds = '/weights_file_of_clouds_trained_UNet.hdf5'
+
+# classificated images path
+class_path = "/predicted"
+
+# classificated clouds images path
+class_clouds = "/predicted_clouds"
+
+# polygons save
+poly_path = '/polygons'
+
+# files saved after the trained UNet
+percentiles_forest = ["/bands_third.npy",
+                       "/bands_nin.npy"]
+
+percentiles_clouds = ["/bands_third_clouds.npy",
+                       "/bands_nin_clouds.npy"]
+
+def_main(save_imgs, save_rgb, save_tiles, unet_weights, unet_clouds,
+         class_path, class_clouds, poly_path, 
+         percentiles_forest, percentiles_clouds, geojson_file)
+```
+
+Some settings must also be made in the file **deforestation_mapping.py**, such as credentials for accessing the Sentinel-Hub (user and passwrod) and defining the time period to be covered by the analysis (parameter date):
+
+```ruby
+# connect to the API
+user = 'USERNAME'
+password = 'PASSWORD' 
+
+api = SentinelAPI(user, password, 'https://scihub.copernicus.eu/dhus')
+
+# search by polygon
+footprint = geojson_to_wkt(read_geojson(boundsdata))
+
+# search for the images
+products = api.query(footprint,
+                 date = (["NOW-30DAYS","NOW"]),
+                 area_relation = 'IsWithin',
+                 platformname = 'Sentinel-2',
+                 processinglevel = 'Level-2A',
+                 #cloudcoverpercentage = (0, 20)
+                )
+```
