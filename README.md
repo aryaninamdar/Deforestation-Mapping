@@ -111,3 +111,5 @@ products = api.query(footprint,
                  #cloudcoverpercentage = (0, 20)
                 )
 ```
+
+![Image not found](https://github.com/aryaninamdar/Deforestation-Mapping/blob/main/examples/example1-2.png)
