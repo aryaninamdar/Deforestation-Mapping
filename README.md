@@ -6,4 +6,4 @@ This repository contains the scripts referring to a methodology that performs th
 ## Example Usage
 To identify deforestation in areas where UNet has already been trained (Amazon and Atlantic Rainforest), it is possible to directly use the scripts presented in the **deforestation-mapping** folder. Otherwise, it is necessary to carry out a new training using the training files of UNet.
 
-### Training the U-Net
+### Training the UNet
