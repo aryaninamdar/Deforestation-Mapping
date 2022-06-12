@@ -113,3 +113,7 @@ products = api.query(footprint,
 ```
 
 ![Image not found](https://github.com/aryaninamdar/Deforestation-Mapping/blob/main/examples/example1-2.png)
+
+
+## Results
+At the end of the algorithm, raster images will be obtained indicating the deforestation spots for the given image, as well as vector files, in the shapefile .shp format, also indicating the deforested areas.
